@@ -15,8 +15,18 @@ public class TarjetaService {
     @Autowired
     TarjetaRepository repo;
 
-    public void crear(Tarjeta tarjeta) {
-        repo.save(tarjeta);
+    public boolean crear(Tarjeta tarjeta) {
+       if(existe(tarjeta.getId()))
+          return false;
+       
+       repo.save(tarjeta);
+
+       return true;
+    }
+
+    public boolean existe(Integer id) {
+        Optional<Tarjeta> tarjeta = repo.findById(id);
+        return tarjeta != null;
     }
 
     public Tarjeta buscarTarjetaPorId(Integer id) {

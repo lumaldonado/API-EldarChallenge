@@ -58,12 +58,12 @@ public class Tarjeta {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public Integer getMarcaId() {
-        return marcaId;
+    public MarcaEnum getMarcaId() {
+        return MarcaEnum.parse(this.marcaId);
     }
 
-    public void setMarcaId(Integer marcaId) {
-        this.marcaId = marcaId;
+    public void setMarcaId(MarcaEnum marcaId) {
+        this.marcaId = marcaId.getValue();
     }
 
     public Holder getHolder() {
@@ -73,6 +73,32 @@ public class Tarjeta {
     public void setHolderId(Holder holder) {
         this.holder = holder;
         this.holder.agregarTarjeta(this);
+    }
+
+    public enum MarcaEnum {
+        VISA(1), NARA(2), AMEX(3); 
+
+        private final int value;
+
+        // NOTE: Enum constructor tiene que estar en privado
+        private MarcaEnum(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static MarcaEnum parse(int id) {
+            MarcaEnum status = null; // Default
+            for (MarcaEnum item : MarcaEnum.values()) {
+                if (item.getValue() == id) {
+                    status = item;
+                    break;
+                }
+            }
+            return status;
+        }
     }
 
     
