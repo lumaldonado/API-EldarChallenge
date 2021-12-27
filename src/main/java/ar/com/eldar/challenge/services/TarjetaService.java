@@ -1,5 +1,8 @@
 package ar.com.eldar.challenge.services;
 
+import java.lang.StackWalker.Option;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,17 @@ public class TarjetaService {
 
     public void crear(Tarjeta tarjeta) {
         repo.save(tarjeta);
+    }
+
+    public Tarjeta buscarTarjetaPorId(Integer id) {
+        Optional<Tarjeta> resultado =  repo.findById(id);
+
+        if(resultado.isPresent()){
+            return resultado.get();
+        }
+
+        return null;    
+    
     }
 
 }
