@@ -16,7 +16,7 @@ public class HolderController {
     @Autowired
     HolderService service;
 
-    @PostMapping("/cardholders")
+    @PostMapping("/cardholders1")
     public ResponseEntity<?> crear(@RequestBody Holder holder) {
         GenericResponse respuesta = new GenericResponse();
 
